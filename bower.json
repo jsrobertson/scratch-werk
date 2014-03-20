@@ -1,0 +1,10 @@
+{
+  "name": "scratch-werk",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "normalize.css": "~3.0.0",
+    "csswizardry-grids": "~2.2.0",
+    "jquery": "~1.11.0"
+  }
+}

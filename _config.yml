@@ -1,0 +1,44 @@
+# =============================================
+# Build config
+# =============================================
+
+root:        _output
+dest:        <%= site.root %>
+assets:      <%= site.dest %>/assets
+
+# Data
+data:        data/**/*.{json,yml}
+
+# Templates
+templates:   templates
+includes:    <%= site.templates %>/includes/*.hbs
+layouts:     <%= site.templates %>/layouts
+layout:      default.hbs
+
+# Pages
+pages:       pages
+
+# Extensions
+helpers:     <%= site.templates %>/helpers/*.js
+
+# =============================================
+# Site metadata
+# =============================================
+
+brand:       JR
+title:       Scratch Werk
+lead:        <%= site.brand %> <%= site.title %>
+
+version:     <%= pkg.version %>
+description: <%= pkg.description %>
+
+# Site
+domain:      http://localhost
+
+# SEO/SEM
+ga:
+  id:             235353
+  domain:         localhost
+  siteid:         false
+  # Google Tags (see: https://www.google.com/tagmanager/)
+  tags:           false
