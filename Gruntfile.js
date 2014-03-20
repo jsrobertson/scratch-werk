@@ -115,7 +115,7 @@ module.exports = function(grunt) {
     // Default task(s).
     grunt.registerTask('default', ['clean', 'assemble']);
 
-    grunt.registerTask('setup', ['clean', 'assemble', 'bowercopy', 'sass', 'concat']);
+    grunt.registerTask('setup', ['default', 'bowercopy', 'sass', 'concat']);
 
     grunt.registerTask('dev', ['setup', 'watch']);
 };
