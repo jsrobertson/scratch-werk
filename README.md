@@ -1,4 +1,4 @@
-#Scratch Werk
+#Scratch werk
 
 ##Prerequisites
 
@@ -9,9 +9,8 @@
 ##Getting started
 
 1. clone repo
-2. npm install (picks up packages.json file)
-3. bower install (picks up bower.json file)
-4. grunt bowercopy to install and copy components
+2. npm install
+3. grunt setup
 
 ##Resources used
 

@@ -10,6 +10,31 @@ module.exports = function(grunt) {
         // Clean build dir
         clean : ['<%= site.dest %>/*'],
 
+        // Build HTML from templates and data
+        assemble: {
+            options: {
+                flatten: true,
+                production: false,
+                assets: '<%= site.assets %>',
+
+                // Metadata
+                pkg: '<%= pkg %>',
+                site: '<%= site %>',
+                data: ['<%= site.data %>'],
+
+                // Templates
+                partials: '<%= site.includes %>',
+                layoutdir: '<%= site.layouts %>',
+                layout: '<%= site.layout %>',
+
+                // Extensions
+                helpers: '<%= site.helpers %>'
+            },
+            pages: {
+                files: {'<%= site.dest %>/': ['<%= site.templates %>/pages/*.hbs']}
+            }
+        },
+
         // Bower copy stuff
         bowercopy: {
             options: {
@@ -52,31 +77,6 @@ module.exports = function(grunt) {
             },
         },
 
-        // Build HTML from templates and data
-        assemble: {
-            options: {
-                flatten: true,
-                production: false,
-                assets: '<%= site.assets %>',
-
-                // Metadata
-                pkg: '<%= pkg %>',
-                site: '<%= site %>',
-                data: ['<%= site.data %>'],
-
-                // Templates
-                partials: '<%= site.includes %>',
-                layoutdir: '<%= site.layouts %>',
-                layout: '<%= site.layout %>',
-
-                // Extensions
-                helpers: '<%= site.helpers %>'
-            },
-            pages: {
-                files: {'<%= site.dest %>/': ['<%= site.templates %>/pages/*.hbs']}
-            }
-        },
-
         // Watch for changes
         watch: {
             css: {
@@ -113,9 +113,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
-    grunt.registerTask('setup', ['clean', 'bowercopy', 'assemble', 'sass', 'concat']);
-
     grunt.registerTask('default', ['clean', 'assemble']);
 
-    grunt.registerTask('dev', ['clean', 'assemble', 'sass', 'concat', 'watch']);
+    grunt.registerTask('setup', ['clean', 'assemble', 'bowercopy', 'sass', 'concat']);
+
+    grunt.registerTask('dev', ['setup', 'watch']);
 };
