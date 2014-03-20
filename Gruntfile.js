@@ -23,7 +23,8 @@ module.exports = function(grunt) {
             },
             js: {
                 files: {
-                    'scripts/vendor/jquery.js': 'jquery/dist/jquery.js'
+                    'scripts/vendor/jquery.js': 'jquery/dist/jquery.js',
+                    '<%= site.assets %>/js/vendor/modernizr.js': 'modernizr/modernizr.js'
                 }
             }
         },
@@ -40,10 +41,22 @@ module.exports = function(grunt) {
             }
         },
 
+        // Concatenate JS
+        concat: {
+            options: {
+                separator: ';',
+            },
+            dist: {
+                  src: ['scripts/vendor/jquery.js', 'scripts/modules/main.js'],
+                  dest: '<%= site.assets %>/js/main.js',
+            },
+        },
+
         // Build HTML from templates and data
         assemble: {
             options: {
                 flatten: true,
+                production: false,
                 assets: '<%= site.assets %>',
 
                 // Metadata
@@ -62,6 +75,29 @@ module.exports = function(grunt) {
             pages: {
                 files: {'<%= site.dest %>/': ['<%= site.templates %>/pages/*.hbs']}
             }
+        },
+
+        // Watch for changes
+        watch: {
+            css: {
+                files: ['styles/**/*.scss'],
+                tasks: ['sass']
+            },
+            templates: {
+                files: ['templates/**/*.hbs'],
+                tasks: ['clean','assemble']
+            }
+        },
+
+        // Connect webserver
+        connect: {
+            server: {
+                options: {
+                    port: 5001,
+                    base: '_output',
+                    keepalive: true
+                }
+            }
         }
 
     });
@@ -72,7 +108,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
+    grunt.registerTask('setup', ['clean', 'bowercopy', 'assemble', 'sass', 'concat']);
+
     grunt.registerTask('default', ['clean', 'assemble']);
+
+    grunt.registerTask('dev', ['clean', 'assemble', 'sass', 'concat', 'watch']);
 };
