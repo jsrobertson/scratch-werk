@@ -84,11 +84,15 @@ module.exports = function(grunt) {
             },
             css: {
                 files: ['styles/**/*.scss'],
-                tasks: ['sass']
+                tasks: ['sass','notify:sass']
             },
             templates: {
                 files: ['templates/**/*.hbs'],
-                tasks: ['clean','assemble']
+                tasks: ['assemble','notify:templates']
+            },
+            content: {
+                files: ['content/*.md'],
+                tasks: ['assemble','notify:content']
             }
         },
 
@@ -100,6 +104,34 @@ module.exports = function(grunt) {
                     base: '_output'
                 }
             }
+        },
+
+        // Notifications
+        notify: {
+            connect: {
+                options: {
+                    title: '<%= site.lead %> ready',
+                    message: 'View at http://localhost:<%= connect.server.options.port %>'
+                }
+            },
+            sass: {
+                options: {
+                    title: 'SASS recompile',
+                    message: 'Successful'
+                }
+            },
+            templates: {
+                options: {
+                    title: 'Templates rebuild',
+                    message: 'Successful'
+                }
+            },
+            content: {
+                options: {
+                    title: 'Content update',
+                    message: 'Successful'
+                }
+            }
         }
 
     });
@@ -107,8 +139,9 @@ module.exports = function(grunt) {
     // Load Tasks
     grunt.loadNpmTasks('assemble');
     grunt.loadNpmTasks('grunt-bowercopy');
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-newer');
+    grunt.loadNpmTasks('grunt-notify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-connect');
@@ -119,5 +152,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('setup', ['default', 'bowercopy', 'sass', 'concat']);
 
-    grunt.registerTask('dev', ['setup', 'connect', 'watch']);
+    grunt.registerTask('dev', ['setup', 'connect', 'notify:connect', 'watch']);
 };
