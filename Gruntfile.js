@@ -79,6 +79,9 @@ module.exports = function(grunt) {
 
         // Watch for changes
         watch: {
+            options: {
+                livereload: true
+            },
             css: {
                 files: ['styles/**/*.scss'],
                 tasks: ['sass']
@@ -94,8 +97,7 @@ module.exports = function(grunt) {
             server: {
                 options: {
                     port: 5001,
-                    base: '_output',
-                    keepalive: true
+                    base: '_output'
                 }
             }
         }
@@ -117,5 +119,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('setup', ['default', 'bowercopy', 'sass', 'concat']);
 
-    grunt.registerTask('dev', ['setup', 'watch']);
+    grunt.registerTask('dev', ['setup', 'connect', 'watch']);
 };
