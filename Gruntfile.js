@@ -100,6 +100,7 @@ module.exports = function(grunt) {
         connect: {
             server: {
                 options: {
+                    hostname: 'localhost',
                     port: 5001,
                     base: '_output'
                 }
@@ -111,7 +112,7 @@ module.exports = function(grunt) {
             connect: {
                 options: {
                     title: '<%= site.lead %> ready',
-                    message: 'View at http://localhost:<%= connect.server.options.port %>'
+                    message: 'View at http://<%= connect.server.options.hostname %>:<%= connect.server.options.port %>'
                 }
             },
             sass: {
