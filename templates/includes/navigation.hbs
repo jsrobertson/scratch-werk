@@ -1,0 +1,9 @@
+<ul>
+{{#withSort pages "data.navigation.order"}}
+    {{#if data.navigation.status}}
+        <li>
+            <a href="{{#if data.parent}}/{{data.parent}}{{/if}}{{#isnt basename "index"}}/{{basename}}{{/isnt}}/index.html">{{data.title}}</a>
+        </li>
+    {{/if}}
+{{/withSort}}
+</ul>

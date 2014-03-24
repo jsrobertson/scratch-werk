@@ -12,6 +12,25 @@
 2. npm install
 3. grunt setup
 
+##Some instructions
+
+These will be improved over time when functionality is confirmed, however, here are some to get started.
+
+###Creating a new page
+
+Create a new .hbs file in the templates/pages directory and include the following YAML front-matter as a starting point.
+
+```yaml
+---
+title: About us
+navigation:
+  status: true
+  order: 2
+---
+```
+
+Should you wish for the page to appear in the navigation, make sure that **navigation** is set to *true* and edit the **order** for the page to appear in the desired position (left to right).
+
 ##Resources used
 
 * [normalize.css](https://github.com/necolas/normalize.css/)

@@ -13,7 +13,8 @@ module.exports = function(grunt) {
         // Build HTML from templates and data
         assemble: {
             options: {
-                flatten: true,
+                plugins: ['assemble-contrib-permalinks'],
+
                 production: false,
                 assets: '<%= site.assets %>',
 
@@ -31,7 +32,15 @@ module.exports = function(grunt) {
                 helpers: '<%= site.helpers %>'
             },
             pages: {
-                files: {'<%= site.dest %>/': ['<%= site.templates %>/pages/*.hbs']}
+                options: {
+                    permalinks: {structure: ':basename/index.html'}
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= site.templates %>/pages',
+                    src: ['**/*.hbs'],
+                    dest: '<%= site.dest %>'
+                }]
             }
         },
 
