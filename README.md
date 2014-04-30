@@ -29,7 +29,7 @@ navigation:
 ---
 ```
 
-Should you wish for the page to appear in the navigation, make sure that **navigation** is set to *true* and edit the **order** for the page to appear in the desired position (left to right).
+Should you wish for the page to appear in the navigation, make sure that **navigation** is set to *true* and edit the **order** value for the page to appear in the desired position (left to right).
 
 ##Resources used
 

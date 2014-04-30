@@ -44,6 +44,22 @@ module.exports = function(grunt) {
             }
         },
 
+        // Prettify files
+        prettify: {
+          options: {
+            indent: 4
+          },
+          all: {
+            files: [{
+                expand: true,
+                cwd: '<%= site.dest %>',
+                src: ['**/*.html'],
+                dest: '<%= site.dest %>',
+                ext: '.html'
+            }]
+          }
+        },
+
         // Bower copy stuff
         bowercopy: {
             options: {
@@ -151,6 +167,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-bowercopy');
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-notify');
+    grunt.loadNpmTasks('grunt-prettify');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -158,7 +175,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
-    grunt.registerTask('default', ['clean', 'assemble']);
+    grunt.registerTask('default', ['clean', 'assemble', 'prettify']);
 
     grunt.registerTask('setup', ['default', 'bowercopy', 'sass', 'concat']);
 

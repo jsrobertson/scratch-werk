@@ -15,6 +15,7 @@
     "grunt-contrib-connect": "^0.7.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-notify": "^0.2.20",
-    "assemble-contrib-permalinks": "^0.3.6"
+    "assemble-contrib-permalinks": "^0.3.6",
+    "grunt-prettify": "^0.3.4"
   }
 }
