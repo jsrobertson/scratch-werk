@@ -15,7 +15,15 @@ module.exports = function(grunt) {
             options: {
                 plugins: ['assemble-contrib-permalinks'],
 
-                production: false,
+                production: (function() {
+                    // Set production to true if --prod flag has been used
+                    if (grunt.option('prod')) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }()),
+
                 assets: '<%= site.assets %>',
 
                 // Metadata
@@ -83,7 +91,14 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 options: {
-                    style: 'expanded'
+                    style: (function() {
+                        // Compress outputted CSS if --prod flag has been used
+                        if (grunt.option('prod')) {
+                            return 'compressed';
+                        } else {
+                            return 'expanded';
+                        }
+                    }())
                 },
                 files: {
                     '<%= site.assets %>/css/main.css': 'styles/main.scss'

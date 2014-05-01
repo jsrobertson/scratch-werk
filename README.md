@@ -31,6 +31,22 @@ navigation:
 
 Should you wish for the page to appear in the navigation, make sure that **navigation** is set to *true* and edit the **order** value for the page to appear in the desired position (left to right).
 
+###Modes
+
+To run in development mode (uncompressed SASS and no GA code):
+
+```shell
+grunt dev
+```
+
+To run in production mode (compressed SASS and GA code):
+
+```shell
+grunt dev --prod
+```
+
+**N.B.** I will change this so it makes more sense.
+
 ##Resources used
 
 * [normalize.css](https://github.com/necolas/normalize.css/)
