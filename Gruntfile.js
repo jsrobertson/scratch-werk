@@ -177,7 +177,7 @@ module.exports = function(grunt) {
 
     });
 
-    // Load Tasks
+    // Load NPM Tasks
     grunt.loadNpmTasks('assemble');
     grunt.loadNpmTasks('grunt-bowercopy');
     grunt.loadNpmTasks('grunt-newer');
@@ -189,10 +189,23 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    // Default task(s).
-    grunt.registerTask('default', ['clean', 'assemble', 'prettify']);
+    grunt.registerTask('default', 'Default task to get you up and running', function() {
+        return grunt.task.run ([
+            'clean',
+            'assemble',
+            'prettify',
+            'bowercopy',
+            'sass',
+            'concat'
+        ]);
+    });
 
-    grunt.registerTask('setup', ['default', 'bowercopy', 'sass', 'concat']);
-
-    grunt.registerTask('dev', ['setup', 'connect', 'notify:connect', 'watch']);
+    grunt.registerTask('dev', 'Run this task when developing to run a local version', function () {
+        return grunt.task.run ([
+            'default',
+            'connect',
+            'notify:connect',
+            'watch'
+        ]);
+    });
 };
